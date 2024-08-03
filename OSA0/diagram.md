@@ -1,13 +1,18 @@
-sequenceDiagram
+    sequenceDiagram
     participant browser
     participant server
+    
     Note right of browser: Käyttäjä täyttä kentän ja paina "Save"
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     Note right of browser: Browser lähettä post request ja redirect
+    
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: HTTP 302 Found (redirect to /exampleapp/notes)
-    Note left of server: Serveri reagoi redirectin
+    server-->>browser: HTTP 302 Found (redirect to /exampleapp/notes)    
     deactivate server
+    
+    
+    Note left of server: Serveri reagoi redirectin
+    
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
