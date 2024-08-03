@@ -1,4 +1,4 @@
-'''mermaid
+
 
     sequenceDiagram
     participant browser
@@ -13,4 +13,4 @@
     
     Note left of server: Server reply with code 201 and sends new Json file with update.
     Note right of browser: Javascript updates new content dynamicly with out reloading other files 
-'''
+
