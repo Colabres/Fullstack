@@ -1,3 +1,10 @@
+const Part = ({ name, amount }) => {
+  return (
+    <p>
+      {name} {amount}
+    </p>
+  )
+}
 const Header = ({course}) => {
 
   console.log(course)
@@ -14,11 +21,9 @@ const Content = ({content}) => {
   console.log(content)
   return (
     <div>     
-
-      <p>{content[0].name} {content[0].amount}</p>
-      <p>{content[1].name} {content[1].amount}</p>
-      <p>{content[2].name} {content[2].amount}</p>
-      
+      <Part name={content[0].name} amount={content[0].amount} />
+      <Part name={content[1].name} amount={content[1].amount} />
+      <Part name={content[2].name} amount={content[2].amount} />      
     </div>
   )
 }
