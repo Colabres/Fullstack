@@ -1,54 +1,5 @@
 import Course from './components/Course'
-const Part = ({ name, amount }) => {
-  return (
-    <p>
-      {name} {amount}
-    </p>
-  )
-}
-const Header = ({course}) => {
 
-  console.log(course)
-  return (
-    <div>     
-
-      <h2>{course}</h2>
-      
-    </div>
-  )
-}
-const Content = ({parts}) => {
-
-  
-  return (
-    <div>
-      {parts.map((element,i) => (
-        <Part key={i} name={element.name} amount={element.exercises}/>
-      ))}     
-    
-    </div>
-  )
-}
-
-const Toatal = ({parts}) => {
-  const total = parts.reduce((s, p) => s + p.exercises, 0)
-  
-  return (
-    <div>
-      <h3>total of {total} exercises </h3>
-    </div>
-  )
-}
-
-const Course =({course}) => {
-  return (
-    <div>
-    <Header course={course.name} />
-    <Content parts={course.parts}/>
-    <Toatal parts={course.parts} />      
-  </div>
-  )
-}
 
 const Courses =({courses}) => {
   return (
