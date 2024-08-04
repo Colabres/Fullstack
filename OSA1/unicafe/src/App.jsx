@@ -8,13 +8,37 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
+const Statistics = ({ good, neutral, bad, all, average, positive }) => {
+  if (all === 0){
+    return (
+      <h3>
+        No feedback given
+      </h3>
+    )
+
+  } 
+
+  return (
+    <div>
+      <h1>statistics</h1>
+      <Display text={`good ${good}`} />
+      <Display text={`neutral ${neutral}`} />
+      <Display text={`bad ${bad}`} />
+      <Display text={`all ${all}`} />
+      <Display text={`average ${average.toFixed(2)}`} />
+      <Display text={`positive ${positive.toFixed(2)} %`} />
+    </div>
+  )
+
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
   const all = good + bad + neutral
-  const average = (good-bad)/all
-  const positive = (good/all)
+  const average = all > 0 ? (good-bad)/all : 0
+  const positive = all > 0 ? (good/all) : 0
 
   const handleGood = () => {    
     setGood(good + 1)
@@ -34,14 +58,8 @@ const App = () => {
         <Button handleClick={handleGood} text='Good' />
         <Button handleClick={handleNeutral} text='Neutral' />
         <Button handleClick={handleBad} text='Bad' />        
-        <h1>statistics</h1>
+        <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive} />
 
-        <Display text={`good ${good}`} />
-        <Display text={`neutral ${neutral}`} />
-        <Display text={`bad ${bad}`} />
-        <Display text={`all ${all}`} />
-        <Display text={`average ${average.toFixed(2)}`} />
-        <Display text={`positive ${positive.toFixed(2)} %`} />
       </div>
     </div>
   )
