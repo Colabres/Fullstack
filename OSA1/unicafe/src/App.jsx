@@ -1,5 +1,5 @@
 import { useState } from 'react'
-const StatisticLine = ({text}) => <div>{text}</div>
+const StatisticLine = ({text,value} ) =>   <tr><td>{text}</td><td>{value}</td></tr>
 
 
 const Button = ({ handleClick, text }) => (
@@ -21,12 +21,16 @@ const Statistics = ({ good, neutral, bad, all, average, positive }) => {
   return (
     <div>
       <h1>statistics</h1>
-      <StatisticLine text={`good ${good}`} />
-      <StatisticLine text={`neutral ${neutral}`} />
-      <StatisticLine text={`bad ${bad}`} />
-      <StatisticLine text={`all ${all}`} />
-      <StatisticLine text={`average ${average.toFixed(2)}`} />
-      <StatisticLine text={`positive ${positive.toFixed(2)} %`} />
+      <table>
+        <tbody>
+      <StatisticLine text={`good`} value= {good} />
+      <StatisticLine text={`neutral`} value={neutral} />
+      <StatisticLine text={`bad`} value={bad} />
+      <StatisticLine text={`all`} value={all} />
+      <StatisticLine text={`average`}  value={average.toFixed(2)} />
+      <StatisticLine text={`positive`} value={`${positive.toFixed(2)} %`} />
+        </tbody>
+      </table>
     </div>
   )
 
