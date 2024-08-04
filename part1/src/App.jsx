@@ -29,6 +29,10 @@ const App = () => {
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
 
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  
   const handleLeftClick = () => {
     setAll(allClicks.concat('L'))
     setLeft(left + 1)
