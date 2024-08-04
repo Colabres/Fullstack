@@ -9,33 +9,7 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-const Statistics = ({ good, neutral, bad, all, average, positive }) => {
-  if (all === 0){
-    return (
-      <h3>
-        No feedback given
-      </h3>
-    )
 
-  } 
-
-  return (
-    <div>
-      <h1>statistics</h1>
-      <table>
-        <tbody>
-      <StatisticLine text={`good`} value= {good} />
-      <StatisticLine text={`neutral`} value={neutral} />
-      <StatisticLine text={`bad`} value={bad} />
-      <StatisticLine text={`all`} value={all} />
-      <StatisticLine text={`average`}  value={average.toFixed(2)} />
-      <StatisticLine text={`positive`} value={`${positive.toFixed(2)} %`} />
-        </tbody>
-      </table>
-    </div>
-  )
-
-}
 
 const App = () => {
   const anecdotes = [
@@ -50,13 +24,24 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(Array(7).fill(0))
+
   const handleSelected = () => {    
     setSelected(getRandomInt(7))
   }
+  const handleVote = () => {
+    const copy = [...points]
+    copy[selected] += 1
+    setPoints(copy)
+  }
+
   return (
     <div>
       <StatisticLine text={anecdotes[selected]}/>
-      <Button handleClick={handleSelected} text={"next pls"} />
+      <StatisticLine text={`has ${points[selected]} votes`}/>
+      <Button handleClick={handleVote} text={"vote"} />
+      <Button handleClick={handleSelected} text={"next anecdote"} />
+      
     </div>
   )
 }
