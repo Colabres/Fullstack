@@ -38,7 +38,7 @@ const Toatal = ({parts}) => {
   
   return (
     <div>
-      <p>Number of exercises {total}</p>
+      <h3>total of {total} exercises </h3>
     </div>
   )
 }
@@ -68,6 +68,10 @@ const App = () => {
       {
         name: 'State of a component',
         exercises: 14
+      },
+      {
+        name: 'State of a component 2',
+        exercises: 24
       }
     ]
   }
