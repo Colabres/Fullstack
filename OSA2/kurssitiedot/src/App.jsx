@@ -30,11 +30,7 @@ const Content = ({parts}) => {
 }
 
 const Toatal = ({parts}) => {
-  let total = 0;
-  
-  for (let i = 0; i < parts.length; i++) {
-    total += parts[i].exercises;
-  }
+  const total = parts.reduce((s, p) => s + p.exercises, 0)
   
   return (
     <div>
