@@ -10,6 +10,14 @@ const App = (props) => {
   const addNumber = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
+
+    const nameExists = persons.some(person => person.name === newName)
+    if (nameExists) {
+      alert(`${newName} is already added to phonebook`)
+      setNewName('')
+      return
+    }
+
     const personObject = {
       name: newName,   
       
