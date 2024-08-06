@@ -24,9 +24,22 @@ const App = (props) => {
 
     const nameExists = persons.some(person => person.name === newName)
     if (nameExists) {
-      alert(`${newName} is already added to phonebook`)
-      setNewName('')
-      setNewNumber('')
+      console.log("hep")
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const person = persons.find(p => p.name === newName)
+        const changedNote = { ...person, number: newNumber }
+
+        personService
+          .update(changedNote.id, changedNote)
+            .then(returnedData => {
+            setPersons(persons.map(person => person.id !== changedNote.id ? person : returnedData))            
+          })
+
+        setNewName('')
+        setNewNumber('')
+      }
+      //alert(`${newName} is already added to phonebook`)
+
       return
     }
 
@@ -43,9 +56,7 @@ const App = (props) => {
       setNewNumber('')
     })
   
-    //setPersons(persons.concat(personObject))
-    //setNewName('')
-    //setNewNumber('')
+
   }
   //handels any change in input
   const handleNameChange = (event) => {
@@ -61,9 +72,23 @@ const App = (props) => {
     console.log(event.target.value)
     setNewSearch(event.target.value)
   }
-
-
-
+  const handleDelete = name => {    
+    const person = persons.find(p => p.name === name)
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService
+      .del(person.id)
+      .then(() => {
+        setPersons(persons.filter(person => person.name !== name));
+      })
+      // .catch(error => {
+      //   alert(
+      //     `the note '${note.content}' was already deleted from server`
+      //   )
+      //   setNotes(notes.filter(n => n.id !== id))
+      // })
+    }
+    
+  }
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('*')
   const [newNumber, setNewNumber] = useState('*')
@@ -82,7 +107,7 @@ const App = (props) => {
       <h2>Numbers</h2>
       ...      
       <ul>
-      <Numbers personsToShow={personsToShow} />
+      <Numbers personsToShow={personsToShow} onDelete={handleDelete} />
       </ul>
     </div>
   )
