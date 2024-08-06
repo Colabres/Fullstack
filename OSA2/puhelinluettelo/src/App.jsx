@@ -4,15 +4,16 @@ import Numbers from './components/Number';
 import PersonForm from './components/PersonForm';
 import { useEffect } from 'react'
 import axios from 'axios'
+import personService from './services/persons'
 
 
 const App = (props) => {
   
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personService
+      .getAll()
+        .then(initialData => {
+        setPersons(initialData)
       })
   }, [])
 
@@ -33,10 +34,18 @@ const App = (props) => {
       name: newName,   
       number:newNumber
     }
+
+    personService
+    .create(personObject)
+      .then(returnedData => {
+      setPersons(persons.concat(returnedData))
+      setNewName('')
+      setNewNumber('')
+    })
   
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber('')
+    //setPersons(persons.concat(personObject))
+    //setNewName('')
+    //setNewNumber('')
   }
   //handels any change in input
   const handleNameChange = (event) => {
