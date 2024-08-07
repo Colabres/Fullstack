@@ -20,6 +20,17 @@ const App = (props) => {
       </div>
     )
   }
+  const Notification2 = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+  
+    return (
+      <div className="error">
+        {message}
+      </div>
+    )
+  }
 
   useEffect(() => {
     personService
@@ -110,12 +121,13 @@ const App = (props) => {
           setStatus(null)
         }, 5000)
       })
-      // .catch(error => {
-      //   alert(
-      //     `the note '${note.content}' was already deleted from server`
-      //   )
-      //   setNotes(notes.filter(n => n.id !== id))
-      // })
+      .catch(error => {
+        setErrorMessage(`Information of '${name}' has already been removed from server`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+        setPersons(persons.filter(person => person.name !== name))
+      })
     }
     
   }
@@ -123,7 +135,8 @@ const App = (props) => {
   const [newName, setNewName] = useState('*')
   const [newNumber, setNewNumber] = useState('*')
   const [search, setNewSearch] = useState('')
-  const [operationStatus, setStatus] = useState("null")
+  const [operationStatus, setStatus] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
 
 
@@ -136,6 +149,7 @@ const App = (props) => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={operationStatus} />
+      <Notification2 message={errorMessage} />
       <Filter search={search} handleFilterChange={handleFilterChange} ></Filter>
       
       <h2>add a new</h2>
