@@ -5,10 +5,22 @@ import PersonForm from './components/PersonForm';
 import { useEffect } from 'react'
 import axios from 'axios'
 import personService from './services/persons'
-
+import './index.css'
 
 const App = (props) => {
+
+  const Notification = ({ message }) => {
+    if (message === null) {
+      return null
+    }
   
+    return (
+      <div className="status">
+        {message}
+      </div>
+    )
+  }
+
   useEffect(() => {
     personService
       .getAll()
@@ -37,6 +49,12 @@ const App = (props) => {
 
         setNewName('')
         setNewNumber('')
+        setStatus(
+          `'${newName}'': number changed to '${newNumber}' `
+        )
+        setTimeout(() => {
+          setStatus(null)
+        }, 5000)
       }
       //alert(`${newName} is already added to phonebook`)
 
@@ -54,6 +72,12 @@ const App = (props) => {
       setPersons(persons.concat(returnedData))
       setNewName('')
       setNewNumber('')
+      setStatus(
+        `Added '${newName}' `
+      )
+      setTimeout(() => {
+        setStatus(null)
+      }, 5000)
     })
   
 
@@ -78,7 +102,13 @@ const App = (props) => {
       personService
       .del(person.id)
       .then(() => {
-        setPersons(persons.filter(person => person.name !== name));
+        setPersons(persons.filter(person => person.name !== name))
+        setStatus(
+          `Deleted '${name}' `
+        )
+        setTimeout(() => {
+          setStatus(null)
+        }, 5000)
       })
       // .catch(error => {
       //   alert(
@@ -92,7 +122,12 @@ const App = (props) => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('*')
   const [newNumber, setNewNumber] = useState('*')
-  const [search, setNewSearch] = useState('*')
+  const [search, setNewSearch] = useState('')
+  const [operationStatus, setStatus] = useState("null")
+
+
+
+
   const personsToShow = search === '' ? 
   persons : persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()))
 
@@ -100,6 +135,7 @@ const App = (props) => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={operationStatus} />
       <Filter search={search} handleFilterChange={handleFilterChange} ></Filter>
       
       <h2>add a new</h2>
