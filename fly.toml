@@ -1,13 +1,14 @@
-# fly.toml app configuration file generated for fullstack-proud-feather-4584 on 2024-08-11T21:09:22+03:00
+# fly.toml app configuration file generated for puhelinluettelo on 2024-08-13T11:38:42+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'fullstack-proud-feather-4584'
+app = 'puhelinluettelo'
 primary_region = 'arn'
 
 [build]
-
+[env]
+  PORT = "3000" 
 [http_service]
   internal_port = 3000
   force_https = true

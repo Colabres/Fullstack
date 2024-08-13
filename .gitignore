@@ -1,2 +1,6 @@
 Postman
+dist
+node_modules
+Dockerfile
+
 

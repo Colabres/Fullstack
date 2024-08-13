@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 
 const app = express()
+app.use(express.static('dist'))
 const cors = require('cors')
 
 app.use(cors())
@@ -34,7 +35,7 @@ let persons = [
     }
   ]
   app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
+    response.send('<h1>If you see this then disc is missing</h1>')
   })
   
   app.get('/api/persons', (request, response) => {
@@ -63,6 +64,16 @@ let persons = [
     const date = new Date()
     response.send(`<p>Phonebook has info for ${persons.length} people</p> <p> <p>${date}</p>`)
   })
+  app.put('/api/persons/:id',(request, response) => {
+    console.log(request.body)
+    const name = request.body.name
+    const newnumber = request.body.number
+    const person = persons.find(person => person.name === name)
+    person.number = newnumber
+    console.log(person)
+    console.log(persons)
+    response.json(person)  
+  })
   
   //get 1 note of :id 
   app.get('/api/persons/:id', (request, response) => {
@@ -85,7 +96,7 @@ let persons = [
     response.status(204).end()
   })
   
-  const PORT = 3001
+  const PORT = process.env.PORT || 3001
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
   })
