@@ -73,6 +73,7 @@ const App = (props) => {
     }
 
     const personObject = {
+      id: Math.floor(Math.random() * 1000) + 1,
       name: newName,   
       number:newNumber
     }
@@ -80,7 +81,8 @@ const App = (props) => {
     personService
     .create(personObject)
       .then(returnedData => {
-      setPersons(persons.concat(returnedData))
+      setPersons(persons.concat(returnedData.newperson))
+      console.log(returnedData)
       setNewName('')
       setNewNumber('')
       setStatus(

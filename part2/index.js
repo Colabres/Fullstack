@@ -5,7 +5,7 @@ const cors = require('cors')
 app.use(cors())
 let notes = [
     {
-      id: ")",
+      id: "1",
       content: "HTML is easy",
       important: true
     },
