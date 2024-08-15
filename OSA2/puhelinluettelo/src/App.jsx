@@ -8,6 +8,12 @@ import personService from './services/persons'
 import './index.css'
 
 const App = (props) => {
+  const [persons, setPersons] = useState([]) 
+  const [newName, setNewName] = useState('*')
+  const [newNumber, setNewNumber] = useState('*')
+  const [search, setNewSearch] = useState('')
+  const [operationStatus, setStatus] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const Notification = ({ message }) => {
     if (message === null) {
@@ -39,7 +45,7 @@ const App = (props) => {
         setPersons(initialData)
       })
   }, [])
-
+  console.log(persons)
   //works on submit
   const addNumber = (event) => {
     event.preventDefault()
@@ -133,20 +139,15 @@ const App = (props) => {
     }
     
   }
-  const [persons, setPersons] = useState([]) 
-  const [newName, setNewName] = useState('*')
-  const [newNumber, setNewNumber] = useState('*')
-  const [search, setNewSearch] = useState('')
-  const [operationStatus, setStatus] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
 
 
 
 
+  
   const personsToShow = search === '' ? 
   persons : persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase()))
 
-
+//
   return (
     <div>
       <h2>Phonebook</h2>

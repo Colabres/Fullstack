@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Numbers = ({ personsToShow, onDelete }) => {
-  console.log(personsToShow)
+  console.log(personsToShow)  
   return (
     <div>
       {personsToShow.map(person => (
