@@ -51,32 +51,32 @@ const App = (props) => {
     event.preventDefault()
     //console.log('button clicked', event.target)
 
-    // const nameExists = persons.some(person => person.name === newName)
-    // if (nameExists) {
-    //   console.log("hep")
-    //   if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
-    //     const person = persons.find(p => p.name === newName)
-    //     const changedNote = { ...person, number: newNumber }
+    const nameExists = persons.some(person => person.name === newName)
+    if (nameExists) {
+      console.log("hep")
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const person = persons.find(p => p.name === newName)
+        const changedPerson = { ...person, number: newNumber }
 
-    //     personService
-    //       .update(changedNote.id, changedNote)
-    //         .then(returnedData => {
-    //         setPersons(persons.map(person => person.id !== changedNote.id ? person : returnedData))            
-    //       })
+        personService
+          .update(changedPerson.id, changedPerson)
+            .then(returnedData => {
+            setPersons(persons.map(person => person.id !== changedPerson.id ? person : returnedData))            
+          })
 
-    //     setNewName('')
-    //     setNewNumber('')
-    //     setStatus(
-    //       `'${newName}'': number changed to '${newNumber}' `
-    //     )
-    //     setTimeout(() => {
-    //       setStatus(null)
-    //     }, 5000)
-    //   }
-      //alert(`${newName} is already added to phonebook`)
+        setNewName('')
+        setNewNumber('')
+        setStatus(
+          `'${newName}'': number changed to '${newNumber}' `
+        )
+        setTimeout(() => {
+          setStatus(null)
+        }, 5000)
+      }
 
-    //   return
-    // }
+
+      return
+    }
 
     const personObject = {
       //id: Math.floor(Math.random() * 1000) + 1,
@@ -136,8 +136,7 @@ const App = (props) => {
         }, 5000)
         setPersons(persons.filter(person => person.name !== name))
       })
-    }
-    
+    }    
   }
 
 
