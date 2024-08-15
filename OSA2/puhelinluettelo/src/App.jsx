@@ -45,41 +45,41 @@ const App = (props) => {
         setPersons(initialData)
       })
   }, [])
-  console.log(persons)
+  //console.log(persons)
   //works on submit
   const addNumber = (event) => {
     event.preventDefault()
-    console.log('button clicked', event.target)
+    //console.log('button clicked', event.target)
 
-    const nameExists = persons.some(person => person.name === newName)
-    if (nameExists) {
-      console.log("hep")
-      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
-        const person = persons.find(p => p.name === newName)
-        const changedNote = { ...person, number: newNumber }
+    // const nameExists = persons.some(person => person.name === newName)
+    // if (nameExists) {
+    //   console.log("hep")
+    //   if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+    //     const person = persons.find(p => p.name === newName)
+    //     const changedNote = { ...person, number: newNumber }
 
-        personService
-          .update(changedNote.id, changedNote)
-            .then(returnedData => {
-            setPersons(persons.map(person => person.id !== changedNote.id ? person : returnedData))            
-          })
+    //     personService
+    //       .update(changedNote.id, changedNote)
+    //         .then(returnedData => {
+    //         setPersons(persons.map(person => person.id !== changedNote.id ? person : returnedData))            
+    //       })
 
-        setNewName('')
-        setNewNumber('')
-        setStatus(
-          `'${newName}'': number changed to '${newNumber}' `
-        )
-        setTimeout(() => {
-          setStatus(null)
-        }, 5000)
-      }
+    //     setNewName('')
+    //     setNewNumber('')
+    //     setStatus(
+    //       `'${newName}'': number changed to '${newNumber}' `
+    //     )
+    //     setTimeout(() => {
+    //       setStatus(null)
+    //     }, 5000)
+    //   }
       //alert(`${newName} is already added to phonebook`)
 
-      return
-    }
+    //   return
+    // }
 
     const personObject = {
-      id: Math.floor(Math.random() * 1000) + 1,
+      //id: Math.floor(Math.random() * 1000) + 1,
       name: newName,   
       number:newNumber
     }
@@ -87,7 +87,7 @@ const App = (props) => {
     personService
     .create(personObject)
       .then(returnedData => {
-      setPersons(persons.concat(returnedData.newperson))
+      setPersons(persons.concat(returnedData.savedPerson))
       console.log(returnedData)
       setNewName('')
       setNewNumber('')
