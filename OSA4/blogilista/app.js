@@ -1,3 +1,6 @@
+//this is main module that connects all trhe others
+//config holds connection information, logger for log info, express is a server, cors to be able to controll from different ip,
+// blogsrouter/blogs hold all the routes and logic, mongoose is a library for mongoDB. 
 //require is an import both my modules and librarys
 const config = require('./utils/config')
 const express = require('express')
