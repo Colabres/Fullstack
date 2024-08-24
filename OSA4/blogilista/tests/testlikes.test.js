@@ -15,7 +15,7 @@ beforeEach(async () => {
 
   })
 
-  test('add new block', async () => {
+  test('test likes', async () => {
     const newBlog = {
         title: 'new blog',
         author: 'John Doe',
