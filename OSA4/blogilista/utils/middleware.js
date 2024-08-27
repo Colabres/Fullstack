@@ -13,29 +13,29 @@ const tokenExtractor = (request, response, next) => {
     next() 
   }
   const userExtractor = async (request, response, next) => {
-    console.log('UserExtractor: at work');
-    const token = request.token;
-    console.log('Token in userExtractor:', token);
+    console.log('UserExtractor: at work')
+    const token = request.token
+    console.log('Token in userExtractor:', token)
 
     if (token) {
         try {
-            const decodedToken = jwt.verify(token, process.env.SECRET);
+            const decodedToken = jwt.verify(token, process.env.SECRET)
             if (decodedToken.id) {
-                const user = await User.findById(decodedToken.id);
-                request.user = user || null;
-                console.log('Extracted user:', request.user);
+                const user = await User.findById(decodedToken.id)
+                request.user = user || null
+                console.log('Extracted user:', request.user)
             } else {
-                request.user = null;
+                request.user = null
             }
         } catch (error) {
-            console.error('Error verifying token:', error);
-            return response.status(401).json({ error: 'Token invalid' });
+            console.error('Error verifying token:', error)
+            return response.status(401).json({ error: 'Token invalid' })
         }
     } else {
-        request.user = null;
+        request.user = null
     }
 
-    next();
+    next()
     }
 
 
