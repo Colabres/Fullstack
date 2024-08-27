@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({ blog, loggedInUser, handleRemove }) => {
+const Blog = ({ blog, loggedInUser, handleRemove,testLike }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -44,7 +44,7 @@ const Blog = ({ blog, loggedInUser, handleRemove }) => {
       </div>
       <div style={showWhenVisible}>
       <p>{blog.url}</p>
-      <p>{likes}<button onClick={handleLike}>Like</button></p>
+      <p>{likes}<button onClick={testLike || handleLike }>Like</button></p>
       
       <p>{blog.user?.username || 'Unknown user'}</p>
       {loggedInUser && loggedInUser.username === blog.user.username && (
