@@ -8,6 +8,7 @@ import './index.css'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
 
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [operationStatus, setStatus] = useState(null)
