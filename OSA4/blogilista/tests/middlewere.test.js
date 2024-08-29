@@ -32,9 +32,9 @@ test('userExtractor middleware sets user on request', async () => {
     // Login or create a user and get a valid token
     const loginResponse = await api
         .post('/api/login')
-        .send({ username: 'mluukkai', password: 'salainen' });
+        .send({ username: 'mluukkai', password: 'salainen' })
 
-    const token = loginResponse.body.token;
+    const token = loginResponse.body.token
 
     // Make a request to a test endpoint
     // const response = await api

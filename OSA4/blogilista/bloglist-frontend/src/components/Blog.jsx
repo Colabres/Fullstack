@@ -39,16 +39,17 @@ const Blog = ({ blog, loggedInUser, handleRemove,testLike }) => {
 
   return (
     <div style={blogStyle}>
-      <div> 
-        {blog.title} {blog.author} <button onClick={toggleVisibility}>{visible ? 'Hide' : 'Show'}</button>
+      <div > 
+        <span data-testid="blog-div">{blog.title} {blog.author}</span><button data-testid="show/hide-button" onClick={toggleVisibility}>{visible ? 'Hide' : 'Show'}</button>
       </div>
-      <div style={showWhenVisible}>
+      <div data-testid="hiden-div" style={showWhenVisible}>
       <p>{blog.url}</p>
-      <p>{likes}<button onClick={testLike || handleLike }>Like</button></p>
-      
+      {/* <p>{likes}<button onClick={testLike || handleLike }>Like</button></p> */}
+      <span data-testid="likes-count">{likes}</span>
+      <button data-testid="like-button" onClick={testLike || handleLike}>Like</button>
       <p>{blog.user?.username || 'Unknown user'}</p>
       {loggedInUser && loggedInUser.username === blog.user.username && (
-        <button onClick={confirmRemove}>Remove</button>
+        <button data-testid="remove" onClick={confirmRemove}>Remove</button>
       )}
       </div>
   </div>
