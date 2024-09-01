@@ -18,8 +18,11 @@ const Anecdote = ({ anecdote , handleClick }) => {
 
 const Anecdotes = () => {
   const dispatch = useDispatch()
-  const anecdotes = useSelector(state => state)
-  const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes)
+  const anecdotes = useSelector(({filter, anecdotes}) => {
+    return filter === '' ? anecdotes : anecdotes.filter(a => a.content.includes(filter))
+})
+const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes)
+
   return(    
     <div>
       {sortedAnecdotes.map(anecdote =>
