@@ -31,14 +31,15 @@ const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes)
         <Anecdote
           key={anecdote.id}
           anecdote={anecdote}
-          handleClick={() => {
+          handleClick={async () => {
             //dispatch(like(anecdote.id))
-            dispatch(likeAnecdote(anecdote))
             dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
+            dispatch(likeAnecdote(anecdote))
+            
             //dispatch(setNotification(`you voted ${anecdote.content}`))
-            setTimeout(() => {
-              dispatch(clearNotification());
-            }, 5000)
+            // setTimeout(() => {
+            //   dispatch(clearNotification());
+            // }, 5000)
           }
 
           }
