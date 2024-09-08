@@ -12,12 +12,7 @@ const anecdoteSlice = createSlice({
     },
     like(state, action) {
       const updatedAnecdote = action.payload
-      // const id = action.payload
-      // const anecdoteToLike = state.find(a => a.id === id)
-      // const likedAnecdote = { 
-      //   ...anecdoteToLike, 
-      //   votes: anecdoteToLike.votes + 1
-      // }
+
       return state.map(anecdote =>
         anecdote.id !== updatedAnecdote.id ? anecdote : updatedAnecdote 
       )     
@@ -37,7 +32,7 @@ export default anecdoteSlice.reducer
 
 export const createAnecdote = content => {
   return async dispatch => {
-    //newAn is a rdy to use obect with content,votes set to 0 and id
+
     const newAn = await anecdoteService.createNew(content)
     dispatch(appendAn(newAn))
   }
